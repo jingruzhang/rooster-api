@@ -19,6 +19,15 @@ class Api::ProductionsController < ApplicationController
 		end
 	end
 
+	def update
+		production = Production.find(params[:id])
+		if production.update(production_params)
+			render json: production
+		else
+			render json: production.errors
+		end
+	end
+
 	def destroy
 		production = Production.find(params[:id])
 		production.destroy

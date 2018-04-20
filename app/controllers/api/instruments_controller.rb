@@ -19,6 +19,15 @@ class Api::InstrumentsController < ApplicationController
 		end
 	end
 
+	def update
+		instrument = Instrument.find(params[:id])
+		if instrument.update(instrument_params)
+			render json: instrument
+		else
+			render json: instrument.errors
+		end
+	end
+
 	def destroy
 		instrument = Instrument.find(params[:id])
 		instrument.destroy
