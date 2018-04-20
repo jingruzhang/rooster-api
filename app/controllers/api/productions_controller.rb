@@ -1,13 +1,14 @@
 class Api::ProductionsController < ApplicationController
 	#skip_before_filter :verify_authenticity_token
 
+	before_action :set_production, only: [:show, :update, :destroy]
+
 	def index
 		render json: Production.all
 	end
 
 	def show
-		production = Production.find(params[:id])
-	 	render json: production
+	 	render json: @production
 	end
 
 	def create
@@ -20,22 +21,26 @@ class Api::ProductionsController < ApplicationController
 	end
 
 	def update
-		production = Production.find(params[:id])
-		if production.update(production_params)
-			render json: production
+		if @production.update(production_params)
+			render json: @production
 		else
-			render json: production.errors
+			render json: @production.errors
 		end
 	end
 
 	def destroy
-		production = Production.find(params[:id])
-		production.destroy
+		@production.destroy
 		render json: Production.all
 	end
 
 	private
+
 	def production_params
 		params.require(:production).permit(:name, :has_orchestra, :has_vocals, :pay_per_hour, :pay_per_call)
 	end
+
+	def set_production
+		@production = Production.find(params[:id])
+	end
+
 end

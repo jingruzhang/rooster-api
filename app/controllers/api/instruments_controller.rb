@@ -1,13 +1,13 @@
 class Api::InstrumentsController < ApplicationController
 	#skip_before_filter :verify_authenticity_token
+	before_action :set_instrument, only: [:show, :update, :destroy]
 
 	def index
 		render json: Instrument.all
 	end
 
 	def show
-	  instrument = Instrument.find(params[:id])
-	  render json: instrument
+	  render json: @instrument
 	end
 
 	def create
@@ -20,22 +20,26 @@ class Api::InstrumentsController < ApplicationController
 	end
 
 	def update
-		instrument = Instrument.find(params[:id])
-		if instrument.update(instrument_params)
-			render json: instrument
+		if @instrument.update(instrument_params)
+			render json: @instrument
 		else
-			render json: instrument.errors
+			render json: @instrument.errors
 		end
 	end
 
 	def destroy
-		instrument = Instrument.find(params[:id])
-		instrument.destroy
+		@instrument.destroy
 		render json: Instrument.all
 	end
 
 	private
+
 	def instrument_params
 		params.require(:instrument).permit(:position, :calls, :doubling, :principle, :concertmaster_principle_doubling, :fee)
 	end
+
+	def set_instrument
+		@instrument = Instrument.find(params[:id])
+	end
+
 end
