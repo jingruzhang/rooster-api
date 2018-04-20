@@ -13,9 +13,9 @@ class Api::ProductionsController < ApplicationController
 	def create
 		production = Production.new(production_params)
 		if production.save
-			head 200
+			render json: production
 		else
-			head 500
+			render json: production.errors
 		end
 	end
 

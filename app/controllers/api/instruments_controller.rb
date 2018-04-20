@@ -1,5 +1,5 @@
 class Api::InstrumentsController < ApplicationController
-	skip_before_filter :verify_authenticity_token
+	#skip_before_filter :verify_authenticity_token
 
 	def index
 		render json: Instrument.all
@@ -13,9 +13,9 @@ class Api::InstrumentsController < ApplicationController
 	def create
 		instrument = Instrument.new(instrument_params)
 		if instrument.save
-			head 200
+			render json: instrument
 		else
-			head 500
+			render json: instrument.errors
 		end
 	end
 
