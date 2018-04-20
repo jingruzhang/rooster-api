@@ -19,6 +19,12 @@ class Api::InstrumentsController < ApplicationController
 		end
 	end
 
+	def destroy
+		instrument = Instrument.find(params[:id])
+		instrument.destroy
+		render json: Instrument.all
+	end
+
 	private
 	def instrument_params
 		params.require(:instrument).permit(:position, :calls, :doubling, :principle, :concertmaster_principle_doubling, :fee)

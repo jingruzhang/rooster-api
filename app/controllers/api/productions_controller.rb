@@ -19,6 +19,12 @@ class Api::ProductionsController < ApplicationController
 		end
 	end
 
+	def destroy
+		production = Production.find(params[:id])
+		production.destroy
+		render json: Production.all
+	end
+
 	private
 	def production_params
 		params.require(:production).permit(:name, :has_orchestra, :has_vocals, :pay_per_hour, :pay_per_call)
