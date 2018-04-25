@@ -1,5 +1,4 @@
-class Api::InstrumentsController < ApplicationController
-	#skip_before_filter :verify_authenticity_token
+class Api::InstrumentsController < Api::ApiController
 	before_action :set_instrument, only: [:show, :update, :destroy]
 
 	def index

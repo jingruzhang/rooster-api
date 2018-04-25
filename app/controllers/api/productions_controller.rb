@@ -1,5 +1,4 @@
-class Api::ProductionsController < ApplicationController
-	#skip_before_filter :verify_authenticity_token
+class Api::ProductionsController < Api::ApiController
 
 	before_action :set_production, only: [:show, :update, :destroy]
 
