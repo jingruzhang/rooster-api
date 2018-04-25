@@ -1,4 +1,4 @@
-class Api::ProductionsController < Api::ApiController
+class Api::V1::ProductionsController < Api::V1::ApiController
 
 	before_action :set_production, only: [:show, :update, :destroy]
 

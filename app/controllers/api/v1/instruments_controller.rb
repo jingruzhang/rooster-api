@@ -1,4 +1,4 @@
-class Api::InstrumentsController < Api::ApiController
+class Api::V1::InstrumentsController < Api::V1::ApiController
 	before_action :set_instrument, only: [:show, :update, :destroy]
 
 	def index
